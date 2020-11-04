@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+{% for v in obj%}
+    <h3>{{v.title}}</h3>
+    {% for r in v.review_set.all %}
+     {% if user.username == r.name %}
+        {{r.get_body_display }}({{r.name}})
+     {% endif %}
+    {% endfor %}
+{% endfor %}
+
+<ul>
+    {% if next_id in id_all %}
+    <a href="{% url 'video:rev_input'  next_id%}">Next video</a>
+    {% endif %}
+    <a href="{% url 'video:list' %}">Back to Video List</a>
+</ul>
+
+{% endblock main %}

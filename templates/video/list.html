@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% if user.is_authenticated %}
+<h1>{{user.username}} is login now. </h1>
+{% for v in video_list%}
+    <h3>{{v.title}}</h3>
+    <h4>{{v.videofile}}</h4>
+    <hr />
+    <video name = {{v.title}} controls preload="none" width='50%' height ='40%'>
+    <source src ='{{BASE_URL}}{{MEDIA_URL}}{{v.videofile}}' type='video/mp4'></source>
+    </video>
+    <a href='./rev_input/{{v.id}}'>Analysis</a>
+    <ul>
+        {% for r in v.review_set.all %}
+        {% if user.username == r.name %}
+           Answer: {{r.get_body_display}}
+        {% endif %}
+       {% endfor %}
+    </ul>  
+{% endfor %}
+<ul>
+    <a href='./rev_list'>Review list</a>
+</ul>
+<a href="{% url 'video:logout' %}" class="btn btn-primary" role="button" aria-pressed="true">logout</a>
+{% else %}
+please login
+<a href="{% url 'video:login' %}" class="btn btn-primary" role="button" aria-pressed="true">login</a>
+{% endif %}
+
+{% endblock main %}

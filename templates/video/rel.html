@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h3>{{video.title}} review</h3>
+<hr />
+<ul>
+    {% for rev in video.review_set.all %}
+    <li>{{rev.name}}-{{rev.body}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
