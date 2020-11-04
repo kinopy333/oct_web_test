@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '*swf$xt(zg2vfuqsz)d8j6s6&=*c$vogvl^p==vww8+x#9ug6m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -130,3 +131,8 @@ BASE_URL="http://127.0.0.1:8000"
 LOGIN_URL='/login/'
 
 #AUTH_USER_MODEL = 'users.CustomUser'
+
+##
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+
