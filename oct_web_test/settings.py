@@ -146,13 +146,13 @@ LOGIN_URL='/login/'
 
 #AUTH_USER_MODEL = 'users.CustomUser'
 
-if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku #追加
-    django_heroku.settings(locals()) #追加
-
 #追加
 try:
     from .local_settings import *
 except ImportError:
     pass
+
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku #追加
+    django_heroku.settings(locals()) #追加
